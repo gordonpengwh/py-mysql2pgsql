@@ -105,8 +105,8 @@ class MysqlReader(object):
                 return 'varchar'
             elif data_type.startswith('char'):
                 return 'char'
-            elif data_type in ('bit(1)', 'tinyint(1)', 'tinyint(1) unsigned'):
-                return 'boolean'
+            #elif data_type in ('bit(1)', 'tinyint(1)', 'tinyint(1) unsigned'):
+            #    return 'boolean'
             elif re.search(r'^smallint.* unsigned', data_type) or data_type.startswith('mediumint'):
                 return 'integer'
             elif data_type.startswith('smallint'):
@@ -172,7 +172,7 @@ class MysqlReader(object):
             comment = table_status[17]
             return comment
 
-          
+
         def _load_indexes(self):
             explain = self.reader.db.query('SHOW CREATE TABLE `%s`' % self.name, one=True)
             explain = explain[1]
